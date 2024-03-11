@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1709658512 source:d:\12345576\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<SDL_mixer.h>
+	<bits/stdc++.h>
+	<sstream>
+

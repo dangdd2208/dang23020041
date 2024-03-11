@@ -1,175 +1,21 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
-#include<SDL_mixer.h>
-#include<bits/stdc++.h>
-#include <sstream>
-
-//chieu dai va rong cua Window
-const int SCREEN_WIDTH = 1200;
-const  int SCREEN_HEIGHT = 696;
-int vatdai = 125;
-int vatrong = 300;
-const int chieudai = 60;
-const int chieurong = 40;
-const int chieurongimage = 40;
-const int imagewith=21;
-const int sovatcantoida = 20;
-int n=3;//so vat the ban dau
-
-double *barrierPositionsy = new double [n];
-void khoitao()
-{
-for(int i = 0; i < sovatcantoida; i++)
-{
-    barrierPositionsy[i] = 0;
-}
-
-}
-
-//Texture
-class LTexture
-{
-	public:
-		LTexture();
-
-		~LTexture();
-
-		bool loadFromFile( std::string path );
-
-		void free();
-
-		void render( int x, int y );
-
-		int getWidth();
-		int getHeight();
-
-	private:
-		//The actual hardware texture
-		SDL_Texture* mTexture;
-
-		//Image dimensions
-		int mWidth;
-		int mHeight;
-};
-
-//Hamtaocuaso
-bool init();
-
-bool loadMedia();
-
-void close();
-
-//window
-SDL_Window* gWindow = NULL;
-
-//render
-SDL_Renderer* gRenderer = NULL;
-
-LTexture gFooTexture;
-LTexture gBackgroundTexture;
-LTexture barrier[sovatcantoida];
-
-//mixer nen
-Mix_Music* sound = NULL ;
-//
-Mix_Chunk* bomno = NULL ;
-Mix_Chunk* phim = NULL ;
-
-LTexture::LTexture()
-{
-	mTexture = NULL;
-	mWidth = 0;
-	mHeight = 0;
-}
-
-LTexture::~LTexture()
-{
-	free();
-}
-
-bool LTexture::loadFromFile( std::string path )
-{
-	free();
-
-	SDL_Texture* newTexture = NULL;
-
-	//Load anh
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		return false;
-	}
-	else
-	{
-		//phu mau cho anh chen (anh chen nen de mau tieu chuan RGB)
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
-
-		//
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-		if( newTexture == NULL )
-		{
-		     return false;
-		}
-		else
-		{
-
-            mWidth = loadedSurface -> w;
-			mHeight = loadedSurface -> h;
-		}
-
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	mTexture = newTexture;
-	return mTexture ;
-}
-
-void LTexture::free()
-{
-	if( mTexture != NULL )
-	{
-		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
-	}
-}
-
-void LTexture::render( int x, int y )
-{
-	//Dieu chinh render
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	SDL_RenderCopy( gRenderer, mTexture, NULL, &renderQuad );
-}
-
-int LTexture::getWidth()
-{
-	return mWidth;
-}
-
-int LTexture::getHeight()
-{
-	return mHeight;
-}
-
+#include "LTexture.h"
+#include "main.h"
 bool init()
 {
-	//Initialization flag
+	// flag
 	bool success = true;
 
-	//Initialize SDL
+	// SDL
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
 	{
 		success = false;
 	}
 	else
 	{
-		//Set texture filtering to linear
+		//set texture
 		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
 		{
-			printf( "Warning" );
+			std::cout << "Warming.."<<std::endl;
 		}
 
 		//Create window
@@ -206,31 +52,41 @@ bool init()
 			}
 		}
 	}
-
+    //TTF
+    if(TTF_Init() == -1 )
+    {
+        success = false ;
+    }
+    gfont = TTF_OpenFont("Anta-Regular.ttf",28) ; //duong dan dem file .ttf
+    if(gfont == NULL)
+    {
+        success = false ;
+    }
 	return success;
 }
 
+//ham load
 bool loadMedia()
 {
 	bool success = true;
 
 	for(int i=0;i < sovatcantoida ; i++)
     {
-        if( !barrier[i].loadFromFile("barrier.png") )
+        if( !barrier[i].loadFromFile(gRenderer,"barrier.png") )
         {
             success=false;
         }
     }
-	if( !gFooTexture.loadFromFile( "plane_fly.png" ) )
+	if( !gFooTexture.loadFromFile(gRenderer, "plane_fly.png" ) )
 	{
 
 		success = false;
 	}
 
-	if( !gBackgroundTexture.loadFromFile( "abcd.jpg" ) )
-	{
-		success = false;
-	}
+    if(!gBackgroundTexture.loadFromFile(gRenderer,"55033334-forest-game-background-background-2d-game-application-vector-design-tileable-horizontally-size.jpg"))
+    {
+        success = false ;
+    }
 
     //load music
     sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3" );
@@ -252,18 +108,24 @@ bool loadMedia()
 	return success;
 }
 
+//ham dong
 void close()
 {
 	for(int i=0;i<sovatcantoida;i++)
         barrier[i].free() ;
 	gFooTexture.free();
 	gBackgroundTexture.free();
-
+    for(int i=0 ;i < Max_heath ; i++)
+    {
+        heathy2[i].free();
+    }
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 	gRenderer = NULL;
 
+    //ttf
+    TTF_CloseFont(gfont);
 	//close music
     Mix_FreeMusic(sound);
 
@@ -275,15 +137,226 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 	Mix_Quit();
+	TTF_Quit();
+}
+//ham khoi tao text : mau den
+void rendertext(const std::string &s ,int x ,int y )
+{
+     SDL_Color textColor = {0, 0, 0};
+     SDL_Surface* textSurface = TTF_RenderText_Solid(gfont, s.c_str(), textColor);
+     if(textSurface == NULL)
+     {
+         std :: cout<< "Warming" << TTF_GetError()<<std::endl;
+     }
+     else
+     {
+         SDL_Texture* texture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
+        if (texture == NULL)
+        {
+           std::cout<< "Warming: "<< SDL_GetError();
+        }
+        else
+        {
+            SDL_Rect renderQuad = {x, y, textSurface->w, textSurface->h};
+            SDL_RenderCopy(gRenderer, texture, NULL, &renderQuad);
+            SDL_DestroyTexture(texture);
+        }
+        SDL_FreeSurface(textSurface);
+     }
+}
+//chu mau do
+void rendertext2(const std::string &s ,int x ,int y)
+{
+    SDL_Color textColor = {255, 0, 0};
+     SDL_Surface* textSurface = TTF_RenderText_Solid(gfont, s.c_str(), textColor);
+     if(textSurface == NULL)
+     {
+         std :: cout<< "Warming" << TTF_GetError()<<std::endl;
+     }
+     else
+     {
+         SDL_Texture* texture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
+        if (texture == NULL)
+        {
+           std::cout<< "Warming: "<< SDL_GetError();
+        }
+        else
+        {
+            SDL_Rect renderQuad = {x, y, textSurface->w, textSurface->h};
+            SDL_RenderCopy(gRenderer, texture, NULL, &renderQuad);
+            SDL_DestroyTexture(texture);
+        }
+        SDL_FreeSurface(textSurface);
+     }
+}
+void resetGame() {
+    gFooTexture.free();
+    // Xóa các vật thể rơi xuống
+    for(int i = 0; i < sovatcantoida; ++i) {
+        barrier[i].free();
+    }
+
+    // Xóa các trái tim cũ
+    for(int i = 0; i < YourHeath; ++i) {
+        heathy[i].free();
+    }
+    for(int i = 0;i < Max_heath; i++)
+    {
+        heathy2[i].free();
+    }
+
+    if (!gFooTexture.loadFromFile(gRenderer, "plane_fly.png")) {
+
+        return;
+    }
+
+    for(int i = 0; i < Max_heath; ++i) {
+        if (!heathy[i].loadFromFile(gRenderer, "traitim.png")) {
+
+            return;
+        }
+
+        heathy[i].render(gRenderer,i * 30, 0);
+    }
+
+
+    YourHeath = Max_heath;
+
+    vatdai = 125;
+    vatrong = 300;
+
+
+    speed = 0.05;
+
+    // Khởi tạo lại số lượng vật thể rơi xuống
+    n = DEFAULT_NUMBER_OF_BARRIERS-1;
+
+    // Khởi tạo lại vị trí của các vật thể rơi xuống
+    for(int i = 0; i <sovatcantoida ; ++i) {
+            if(!barrier[i].loadFromFile(gRenderer,"barrier.png"))
+            {
+                return ;
+            }
+    }
+    for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++)
+    {
+        barrierPositionsx[i]=randomimage(100,1000);
+        barrierPositionsy[i]= 0;
+    }
 }
 
+void Menu(bool &quit)
+{
+    gBackgroundTexture.render(gRenderer,0,0);
+   //t//khoi tao game :
+    rendertext("MENU",SCREEN_WIDTH / 2-100 , SCREEN_HEIGHT / 2 - 150 ) ;
+    rendertext("PLAY" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
+    rendertext("QUIT" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+    SDL_RenderPresent(gRenderer);
+    bool isclick = false ;
+
+    while(!isclick)
+    {
+        SDL_Event e ;
+        while(SDL_PollEvent(&e))
+        {
+            if(e.type == SDL_QUIT)
+            {
+                quit = false ;
+                isclick = true ;
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                int mouseX, mouseY;
+                SDL_GetMouseState(&mouseX, &mouseY);
+                if (mouseX > SCREEN_WIDTH / 2 - 100 && mouseX < SCREEN_WIDTH / 2 + 100 &&
+                    mouseY > SCREEN_HEIGHT / 2 - 50 && mouseY < SCREEN_HEIGHT / 2)
+                {
+                    //doi mau chu
+                    rendertext2("PLAY" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
+                    gBackgroundTexture.free();
+                    if(!gBackgroundTexture.loadFromFile(gRenderer,"abcd.jpg"))
+                    {
+                        return ;
+                    }
+                    SDL_RenderPresent(gRenderer);
+                    //tao do tre
+                    SDL_Delay(500);
+
+                    isclick = true;
+                    resetGame();
+                }
+                if( mouseY > SCREEN_HEIGHT / 2 + 50 && mouseY < SCREEN_HEIGHT / 2 + 100)
+                {
+                    //doi mau chu
+                    rendertext2("QUIT" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+
+                    isclick = true;
+                    // Thoát chương trình
+                    quit = false ;
+                }
+        }
+    }
+    }
+}
+
+void hieuungno(bool &quit,double speed)
+{
+    //khoi tao game :
+    rendertext("Score : " + std :: to_string((SDL_GetTicks()-dem)/100),SCREEN_WIDTH / 2-100, SCREEN_HEIGHT / 2 - 250 );
+    dem = SDL_GetTicks() ;
+    rendertext("MENU",SCREEN_WIDTH / 2-100 , SCREEN_HEIGHT / 2 - 150 ) ;
+    rendertext("Play Again" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
+    rendertext("Quit" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+    SDL_RenderPresent(gRenderer);
+    bool isclick = false ;
+
+    while(!isclick)
+    {
+        SDL_Event e ;
+        while(SDL_PollEvent(&e))
+        {
+            if(e.type == SDL_QUIT)
+            {
+                quit = true ;
+                isclick = true ;
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                int mouseX, mouseY;
+                SDL_GetMouseState(&mouseX, &mouseY);
+                if (mouseX > SCREEN_WIDTH / 2 - 100 && mouseX < SCREEN_WIDTH / 2 + 100 &&
+                    mouseY > SCREEN_HEIGHT / 2 - 50 && mouseY < SCREEN_HEIGHT / 2)
+                {
+                    //doi mau chu
+                    rendertext2("Play Again" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
+                    SDL_RenderPresent(gRenderer);
+                    //tao do tre
+                    SDL_Delay(500);
+
+                    isclick = true;
+                    resetGame();
+                }
+                if( mouseY > SCREEN_HEIGHT / 2 + 50 && mouseY < SCREEN_HEIGHT / 2 + 100)
+                {
+                    //doi mau chu
+                    rendertext2("Quit" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+
+                    isclick = true;
+                    quit = true;
+                    // Thoát chương trình
+                }
+        }
+    }
+    }
+}
 double  randomimage(int a,int b)
 {
     return rand()%(b-imagewith)+a;
 }
 
-double speed = 0.05;
-
+//ham kiem tra va chm
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {
     // rect của a
@@ -308,6 +381,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
     return true;
 }
 
+int count1 = 0;
 int main( int argc, char* args[] )
 {
 
@@ -317,37 +391,55 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-
 		if( !loadMedia() )
 		{
 			return 0;
 		}
 		else
 		{
+		    bool kt = true ;
+		    Menu(kt);
+		    if(kt)
+            {
+		    //ham khoi tao cho srand(time(NULL))
+		    srand(time(NULL));
 			// flag
-			bool quit = false;
-
+			bool quit = false,isDie =false;
+			//khoi tao trai tim
+            for(int i=0;i<YourHeath;i++)
+            {
+            if( !heathy[i].loadFromFile(gRenderer ,"traitim.png"))
+               {
+                 quit = true;
+               }
+            }
+            //khoi tao mau cho nhan vat .
+            Uint8 alpha = 255 ;
+            gFooTexture.setmau();
 			//Event
 			SDL_Event e;
-			int barrierPositionsx[10];
-
 			//nhac
             Mix_PlayMusic(sound,-1);
-
+            //tao vi tri cho cho vat dau tien .
             for(int i=0;i<n;i++)
             {
                 barrierPositionsx[i]=randomimage(0,SCREEN_WIDTH);
             }
-			//tao vong lap vo han
-			while( !quit )
-			{
 
+		   //khoi tao trai tim
+		    for(int i=0;i<YourHeath;i++)
+            {
+                if( !heathy[i].loadFromFile(gRenderer ,"traitim.png"))
+                {
+                  quit = true;
+                }
+            }
+            //tao vong lap vo han
+            while( !quit )
+			{
 			   // bat su kien:
 				while( SDL_PollEvent( &e ) != 0 )
 				{
-
-
-					//tat cua so:
 					if( e.type == SDL_QUIT )
 					{
 						quit = true;
@@ -358,53 +450,49 @@ int main( int argc, char* args[] )
                         switch(e.key.keysym.sym)
                         {
                         case SDLK_UP : case SDLK_w :
-                            vatrong -= chieurong/3;
-                            Mix_PlayChannel(-1,phim,0);
+                            vatrong -= MOVE_SPEED;
                             if(vatrong < 0 ) vatrong = 0;
                             break;
 
                         case SDLK_DOWN : case SDLK_s :
-                             vatrong += chieurong/3;
-                             Mix_HaltChannel(0);
-                             Mix_PlayChannel(-1,phim,0);
+                             vatrong += MOVE_SPEED;
                             if(vatrong + chieurong >= SCREEN_HEIGHT) vatrong = SCREEN_HEIGHT-chieurong;
                              break;
 
                         case SDLK_RIGHT : case SDLK_d :
-                            vatdai += chieudai/4;
-                            Mix_PlayChannel(-1,phim,0);
+                            vatdai += MOVE_SPEED;
                             if(vatdai + chieudai > SCREEN_WIDTH) vatdai = SCREEN_WIDTH-chieudai;
                             break;
 
                         case SDLK_LEFT : case SDLK_a :
-                            vatdai -=  chieudai/4;
-                            Mix_PlayChannel(-1,phim,0);
+                            vatdai -= MOVE_SPEED;
                             if(vatdai < 0) vatdai = 0;
                             break;
-
                         default :
-                            Mix_PlayChannel(-1,phim,0);
                             break;
 
                          }
                      }
 				  }
-
 				// tao lai mau tren cua so
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
 
 				//background
-				gBackgroundTexture.render( 0, 0 );
+				gBackgroundTexture.render(gRenderer, 0, 0 );
 
-				//lam cho no muot hon
+				//
 				SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
 				//vi tri cua main:
-				gFooTexture.render( vatdai, vatrong );
-
+				gFooTexture.render(gRenderer, vatdai, vatrong );
+                 for(int i=0;i<YourHeath;i++)
+                {
+                    heathy[i].render(gRenderer,i*chieurongheathy,0);
+                }
 				//Update :
                 SDL_Rect rect1={vatdai,vatrong,chieudai,chieurong};
+                //ham tao do roi cho vat .
 				for(int i=0;i<n;i++)
                 {
                   barrierPositionsy[i]+=speed;
@@ -412,7 +500,7 @@ int main( int argc, char* args[] )
                   if(barrierPositionsy[i]>SCREEN_HEIGHT-chieurongimage)
                   {
 
-                      barrierPositionsy[i] = randomimage(0,100);
+                      barrierPositionsy[i] = randomimage(0,90);
 
                       barrierPositionsx[i] = randomimage(0,SCREEN_WIDTH);
 
@@ -420,27 +508,55 @@ int main( int argc, char* args[] )
 
                       n++;
 
-                      if(n>sovatcantoida) {
+                      if(n>sovatcantoida)
+                      {
                             n = sovatcantoida;
+                            speed+=0.00005;
                       }
 
                   }
 
+                  //tao rect cho vat
                   SDL_Rect rect2={barrierPositionsx[i],barrierPositionsy[i],imagewith,chieurongimage};
-                  if(checkCollision(rect1,rect2))
+                  //kiem tra va cham va thoi gian truoc khi va cham tiep theo...
+                  if( (SDL_GetTicks() - lastCollisionTime > COOLDOWN_TIME ) && checkCollision(rect1,rect2))
                   {
-                      Mix_PlayChannel(-1,bomno,0);
-                      quit = true ;
+                     //thay doi thoi gian
+                     lastCollisionTime =SDL_GetTicks();
+                     if(YourHeath > 0)
+                     {
+                       heathy[YourHeath-1].free();
+                       YourHeath--;
+                     }
+                     else
+                     {
+                       SDL_RenderPresent(gRenderer);
+                       hieuungno(quit,speed);
+                     }
                   }
-                barrier[i].render(barrierPositionsx[i],barrierPositionsy[i]);
-                }
-                 SDL_RenderPresent(gRenderer);
+                  else if(lastCollisionTime != 0 &&  SDL_GetTicks()-lastCollisionTime <= COOLDOWN_TIME )
+                  {
+                      //thoi gian :
+                      Uint32 elapsedTime = SDL_GetTicks()-lastCollisionTime ;
+                      //giam mau cua vat khi va cham .
+                      gFooTexture.giammau((Uint8)((float)elapsedTime/COOLDOWN_TIME*255));
+                      //tao hieu ung bien mat trai tim
+                      if(!heathy2[YourHeath].loadFromFile(gRenderer,"traitim2.png"))
+                       {
+                           return 0;
+                       }
+                       //load hinh anh trai tim trang
+                       heathy2[YourHeath].render(gRenderer,YourHeath*chieurongheathy,0);
+                       heathy2[YourHeath].free();
+                  }
+
+                barrier[i].render(gRenderer,barrierPositionsx[i],barrierPositionsy[i]);
+              }
+                SDL_RenderPresent(gRenderer);
 			}
 		}
-
+      }
 	}
-
-	//dong va giai phong bo nho
 	close();
 
 	return 0;

@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1710144889 source:d:\test1\main.cpp
+	"LTexture.h"
+	"main.h"
+
+1709889079 d:\test1\ltexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<SDL_ttf.h>
+
+1710043364 d:\test1\main.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<SDL_mixer.h>
+	<bits/stdc++.h>
+	<sstream>
+	<SDL_ttf.h>
+
+1709889079 source:d:\test1\ltexture.cpp
+	"LTexture.h"
+
