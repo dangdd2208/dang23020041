@@ -1,5 +1,19 @@
 # depslib dependency file v1.0
-1709561673 source:d:\dang123\main.cpp
+1710301866 source:d:\dang123\main.cpp
+	"LTexture.h"
+	"main.h"
+
+1710255704 source:d:\dang123\ltexture.cpp
+	"LTexture.h"
+
+1710255704 d:\dang123\ltexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<SDL_ttf.h>
+
+1710301866 d:\dang123\main.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -7,4 +21,5 @@
 	<SDL_mixer.h>
 	<bits/stdc++.h>
 	<sstream>
+	<SDL_ttf.h>
 

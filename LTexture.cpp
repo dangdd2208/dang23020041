@@ -77,12 +77,6 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
-//set mau
-void LTexture :: setmau()
-{
-    Uint8 alpha=255;
-    SDL_SetTextureAlphaMod(mTexture,alpha);
-}
 //tao hieu ung trong suot
 void LTexture:: giammau(Uint8 alpha)
 {

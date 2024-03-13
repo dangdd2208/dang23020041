@@ -17,7 +17,6 @@ public:
     void render(SDL_Renderer* gRenderer,int x, int y);
     int getWidth();
     int getHeight();
-    void setmau();
     void giammau(Uint8 alpha);
 
 private:
