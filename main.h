@@ -29,18 +29,13 @@ Uint32 lastCollisionTime,dem = 0;
 const Uint32 COOLDOWN_TIME = 1500;
 int n = Max_heath;//so vat the ban dau
 
-double barrierPositionsy[sovatcantoida];
+double barrierPositionsy[20];
 int barrierPositionsx[20];
 //khoi tao vi tri ban dau cho vat
-void khoitao()
-{
- for(int i = 0; i < sovatcantoida; i++)
-  {
-    barrierPositionsy[i] = 0;
-  }
-}
+void khoitao();
 //toc do ban dau  ::
-double speed = 0.05;
+double speed = 0.03,max_speed = 0.36;
+
 //mang song ban dau ::
 int YourHeath = 3;
 //window
@@ -59,7 +54,10 @@ LTexture barrier[sovatcantoida];
 //heath
 LTexture heathy[Max_heath];
 //trai tim rong
-LTexture heathy2[Max_heath];
+LTexture heathy2;
+
+LTexture homepage;
+
 //mixer nen
 Mix_Music* sound = NULL ;
 //ttf
@@ -81,7 +79,7 @@ void resetGame();
 
 void Menu(bool &quit);
 
-double  randomimage(int a,int b);
+double randomimage(int  a,int b);
 
 bool checkCollision(SDL_Rect a, SDL_Rect b);
 

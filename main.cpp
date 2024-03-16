@@ -88,6 +88,10 @@ bool loadMedia()
         success = false ;
     }
 
+    if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
+    {
+        success = false ;
+    }
     //load music
     sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3" );
     if( sound == NULL )
@@ -115,10 +119,9 @@ void close()
         barrier[i].free() ;
 	gFooTexture.free();
 	gBackgroundTexture.free();
-   // for(int i=0 ;i < Max_heath ; i++)
-   // {
-   //     heathy2[i].free();
-   // }
+	homepage.free();
+    heathy2.free();
+
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
@@ -137,6 +140,14 @@ void close()
 	TTF_Quit();
 }
 
+void khoitao()
+{
+ for(int i = 0; i < sovatcantoida; i++)
+  {
+    barrierPositionsy[i] = 0;
+    barrierPositionsx[i] = randomimage(100,1177);
+  }
+}
 int bestScore() {
     std::ifstream doc("Best score.txt");
     if (doc.is_open()) {
@@ -218,16 +229,16 @@ void resetGame() {
     for(int i = 0; i < YourHeath; ++i) {
         heathy[i].free();
     }
-     for(int i = 0;i < Max_heath; i++)
-     {
-        heathy2[i].free();
-    }
 
+    heathy2.free();
     if (!gFooTexture.loadFromFile(gRenderer, "plane_fly.png")) {
 
         return;
     }
-
+    //if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
+   // {
+   //     return ;
+   // }
     for(int i = 0; i < Max_heath; ++i) {
         if (!heathy[i].loadFromFile(gRenderer, "traitim.png")) {
 
@@ -240,7 +251,7 @@ void resetGame() {
     YourHeath = Max_heath;
     vatdai = 125;
     vatrong = 300;
-    speed = 0.05;
+    speed = 0.03;
     // Khởi tạo lại số lượng vật thể rơi xuống
     n = Max_heath;
      //Khởi tạo lại vị trí của các vật thể rơi xuống
@@ -250,11 +261,7 @@ void resetGame() {
                 return ;
             }
     }
-    for(int i=0;i<n;i++)
-    {
-        barrierPositionsx[i]=randomimage(100,1000);
-        barrierPositionsy[i]= 0;
-    }
+    khoitao();
 }
 
 void Menu(bool &quit)
@@ -311,6 +318,7 @@ void Menu(bool &quit)
 
 void hieuungno(bool &quit,double &speed)
 {
+    SDL_RenderPresent(gRenderer);
     rendertext("Score : "+std::to_string((SDL_GetTicks()-dem)/100),SCREEN_WIDTH / 2 - 100,SCREEN_HEIGHT / 2 - 150);
     dem =SDL_GetTicks();
     int tmp = bestScore();
@@ -318,6 +326,8 @@ void hieuungno(bool &quit,double &speed)
     rendertext("BEST SCORE : "+std::to_string(bestScore()),SCREEN_WIDTH / 2 + 275,SCREEN_HEIGHT / 2 - 250);
     rendertext("Play Again" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
     rendertext("Quit" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+
+    homepage.render(gRenderer,1300,0);
     SDL_RenderPresent(gRenderer);
     bool isclick = false ;
     while(!isclick)
@@ -363,7 +373,13 @@ double  randomimage(int a,int b)
 {
     return rand()%(b-imagewith)+a;
 }
+double randomDouble(double min1, double max1) {
+    std::random_device rd;  // Sử dụng để khởi tạo (seed) đối tượng generator bên dưới
+    std::mt19937 gen(rd()); // Mersenne twister PRNG, khởi tạo bằng rd()
+    std::uniform_real_distribution<> dis(min1, max1); // Tạo phân phối đều trong khoảng [min, max]
 
+    return dis(gen);
+}
 //ham kiem tra va chm
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {
@@ -408,6 +424,8 @@ int main( int argc, char* args[] )
 		    Menu(kt);
 		    if(kt)
             {
+            //tao gia tri cho x va y cua vat
+            khoitao();
 			// flag
 			bool quit = false;
 			//Event
@@ -474,38 +492,46 @@ int main( int argc, char* args[] )
 
 				//background
 				gBackgroundTexture.render(gRenderer, 0, 0 );
-
 				//
 				SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
 				//vi tri cua main:
 				gFooTexture.render(gRenderer, vatdai, vatrong );
+				homepage.render(gRenderer,1159,10);
 				//Update :
 				 for(int i=0;i  <  YourHeath;  i++ )
                  {
                     heathy[i].render(gRenderer,i*chieurongheathy,0);
                  }
                 rect1={vatdai,vatrong,chieudai,chieurong};
+
                 //ham tao do roi cho vat .
+
 				for(int i=0;i<n;i++)
                 {
-                  barrierPositionsy[i]+=speed;
-
+                  barrierPositionsy[i]+= randomDouble(speed , 1.5*speed);;
                   if(barrierPositionsy[i]>SCREEN_HEIGHT-chieurongimage)
                   {
-
                       barrierPositionsy[i] = randomimage(0,75);
-
                       barrierPositionsx[i] = randomimage(14,SCREEN_WIDTH-chieurongimage);
+                      barrierPositionsy[i] += randomimage(speed,2*speed);
 
-                      barrierPositionsy[i] += randomimage (speed,speed*1.1);
-                      if(n <= sovatcantoida)
-                      n++;
+                      if(n < sovatcantoida)
+                      {
+                          n++ ;
+                          //barrierPositionsx[n] = randomimage(14,SCREEN_WIDTH-chieurongimage);
+                          //barrierPositionsy[n] = randomimage(0,75);
+                      }
                       else
                       {
                           n = sovatcantoida ;
-                          speed+=0.00005;
+                          speed+=0.0005;
+                          if(speed > max_speed)
+                          {
+                              speed = max_speed ;
+                          }
                       }
+
 
                   }
                   //tao rect cho vat
@@ -519,6 +545,7 @@ int main( int argc, char* args[] )
                       {
                         heathy[YourHeath-1].free();
                         YourHeath--;
+
                       }
                       else
                       {
@@ -532,13 +559,13 @@ int main( int argc, char* args[] )
                       //giam mau cua vat khi va cham .
                       gFooTexture.giammau((Uint8)((float)elapsedTime/COOLDOWN_TIME*255));
                       //tao hieu ung bien mat trai tim
-                      if(!heathy2[YourHeath].loadFromFile(gRenderer,"traitim2.png"))
+                      if(!heathy2.loadFromFile(gRenderer,"traitim2.png"))
                          {
-                             return 0;
+                           return 0;
                          }
-                   //     //load hinh anh trai tim trang
-                        heathy2[YourHeath].render(gRenderer,YourHeath*chieurongheathy,0);
-                        heathy2[YourHeath].free();
+                       //load hinh anh trai tim trang
+                       heathy2.render(gRenderer,YourHeath*chieurongheathy,0);
+                       heathy2.free();
                     }
                  barrier[i].render(gRenderer,barrierPositionsx[i],barrierPositionsy[i]);
               }

@@ -18,7 +18,7 @@ public:
     int getWidth();
     int getHeight();
     void giammau(Uint8 alpha);
-
+    void gettexture();
 private:
     SDL_Texture* mTexture;
     int mWidth;
