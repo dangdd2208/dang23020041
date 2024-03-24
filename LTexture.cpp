@@ -82,4 +82,7 @@ void LTexture:: giammau(Uint8 alpha)
 {
     SDL_SetTextureAlphaMod(mTexture,alpha);
 }
-
+void LTexture :: gettexture()
+{
+    SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
+}

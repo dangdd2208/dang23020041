@@ -88,26 +88,16 @@ bool loadMedia()
         success = false ;
     }
 
-    if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
-    {
-        success = false ;
-    }
+   // if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
+   // {
+   //     success = false ;
+   // }
     //load music
     sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3" );
     if( sound == NULL )
 	{
 		success = false;
 	}
-   // bomno = Mix_LoadWAV("8-bit-video-game-fail-version-2-145478.mp3");
-   // if(bomno == NULL)
-        // {
-   //     success = false;
-    //}
-   // phim =Mix_LoadWAV("mech-keyboard-02-102918.mp3");
-   // if(phim ==  NULL)
-    //{
-   //     success = false;
-   // }
 
 	return success;
 }
@@ -119,7 +109,7 @@ void close()
         barrier[i].free() ;
 	gFooTexture.free();
 	gBackgroundTexture.free();
-	homepage.free();
+	//homepage.free();
     heathy2.free();
 
 	SDL_DestroyRenderer( gRenderer );
@@ -235,10 +225,6 @@ void resetGame() {
 
         return;
     }
-    //if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
-   // {
-   //     return ;
-   // }
     for(int i = 0; i < Max_heath; ++i) {
         if (!heathy[i].loadFromFile(gRenderer, "traitim.png")) {
 
@@ -251,7 +237,7 @@ void resetGame() {
     YourHeath = Max_heath;
     vatdai = 125;
     vatrong = 300;
-    speed = 0.03;
+    speed = 0.05;
     // Khởi tạo lại số lượng vật thể rơi xuống
     n = Max_heath;
      //Khởi tạo lại vị trí của các vật thể rơi xuống
@@ -270,6 +256,7 @@ void Menu(bool &quit)
     rendertext("BEST SCORE : " +std::to_string(bestScore()) , SCREEN_WIDTH/2 + 275 , SCREEN_HEIGHT/2 -150 );
     rendertext("PLAY" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
     rendertext("QUIT" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
+//    homepage.free() ;
     SDL_RenderPresent(gRenderer);
     bool isclick = false ;
 
@@ -318,16 +305,15 @@ void Menu(bool &quit)
 
 void hieuungno(bool &quit,double &speed)
 {
-    SDL_RenderPresent(gRenderer);
+
     rendertext("Score : "+std::to_string((SDL_GetTicks()-dem)/100),SCREEN_WIDTH / 2 - 100,SCREEN_HEIGHT / 2 - 150);
     dem =SDL_GetTicks();
     int tmp = bestScore();
     khoitaoBestScore( tmp ,(SDL_GetTicks()-dem)/100);
-    rendertext("BEST SCORE : "+std::to_string(bestScore()),SCREEN_WIDTH / 2 + 275,SCREEN_HEIGHT / 2 - 250);
+    rendertext("BEST SCORE : "+std::to_string(bestScore()), SCREEN_WIDTH / 2 + 275 , SCREEN_HEIGHT / 2 - 250);
     rendertext("Play Again" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
     rendertext("Quit" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
 
-    homepage.render(gRenderer,1300,0);
     SDL_RenderPresent(gRenderer);
     bool isclick = false ;
     while(!isclick)
@@ -374,9 +360,9 @@ double  randomimage(int a,int b)
     return rand()%(b-imagewith)+a;
 }
 double randomDouble(double min1, double max1) {
-    std::random_device rd;  // Sử dụng để khởi tạo (seed) đối tượng generator bên dưới
-    std::mt19937 gen(rd()); // Mersenne twister PRNG, khởi tạo bằng rd()
-    std::uniform_real_distribution<> dis(min1, max1); // Tạo phân phối đều trong khoảng [min, max]
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(min1, max1);
 
     return dis(gen);
 }
@@ -497,42 +483,36 @@ int main( int argc, char* args[] )
 
 				//vi tri cua main:
 				gFooTexture.render(gRenderer, vatdai, vatrong );
-				homepage.render(gRenderer,1159,10);
+			//	homepage.render(gRenderer,1159,10);
 				//Update :
-				 for(int i=0;i  <  YourHeath;  i++ )
+                for(int i=0;i  <  YourHeath;  i++ )
                  {
                     heathy[i].render(gRenderer,i*chieurongheathy,0);
                  }
                 rect1={vatdai,vatrong,chieudai,chieurong};
-
                 //ham tao do roi cho vat .
-
 				for(int i=0;i<n;i++)
                 {
-                  barrierPositionsy[i]+= randomDouble(speed , 1.5*speed);;
+                  barrierPositionsy[i]+=  randomDouble(speed , 1.09*speed);
                   if(barrierPositionsy[i]>SCREEN_HEIGHT-chieurongimage)
                   {
                       barrierPositionsy[i] = randomimage(0,75);
                       barrierPositionsx[i] = randomimage(14,SCREEN_WIDTH-chieurongimage);
-                      barrierPositionsy[i] += randomimage(speed,2*speed);
 
                       if(n < sovatcantoida)
                       {
                           n++ ;
-                          //barrierPositionsx[n] = randomimage(14,SCREEN_WIDTH-chieurongimage);
-                          //barrierPositionsy[n] = randomimage(0,75);
                       }
                       else
                       {
                           n = sovatcantoida ;
-                          speed+=0.0005;
-                          if(speed > max_speed)
+                          speed += 0.0008 ;
+                         if(speed > max_speed)
                           {
                               speed = max_speed ;
                           }
                       }
-
-
+                      SDL_RenderPresent(gRenderer);
                   }
                   //tao rect cho vat
                   rect2 = {barrierPositionsx[i],barrierPositionsy[i],imagewith,chieurongimage};
@@ -547,7 +527,7 @@ int main( int argc, char* args[] )
                         YourHeath--;
 
                       }
-                      else
+                     else
                       {
                          hieuungno(quit,speed);
                       }

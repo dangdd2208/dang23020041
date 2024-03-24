@@ -34,7 +34,7 @@ int barrierPositionsx[20];
 //khoi tao vi tri ban dau cho vat
 void khoitao();
 //toc do ban dau  ::
-double speed = 0.03,max_speed = 0.36;
+double speed = 0.05,max_speed = 0.175;
 
 //mang song ban dau ::
 int YourHeath = 3;
@@ -56,7 +56,7 @@ LTexture heathy[Max_heath];
 //trai tim rong
 LTexture heathy2;
 
-LTexture homepage;
+//LTexture homepage;
 
 //mixer nen
 Mix_Music* sound = NULL ;
