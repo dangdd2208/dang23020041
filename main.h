@@ -33,10 +33,10 @@ double barrierPositionsy[20];
 int barrierPositionsx[20];
 //khoi tao vi tri ban dau cho vat
 void khoitao();
-//toc do ban dau  ::
+//toc do ban dau  :
 double speed = 0.05,max_speed = 0.175;
 
-//mang song ban dau ::
+//mang song ban dau
 int YourHeath = 3;
 //window
 SDL_Window* gWindow = NULL;
@@ -56,7 +56,7 @@ LTexture heathy[Max_heath];
 //trai tim rong
 LTexture heathy2;
 
-//LTexture homepage;
+//LTexture homepage
 
 //mixer nen
 Mix_Music* sound = NULL ;

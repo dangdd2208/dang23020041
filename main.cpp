@@ -256,7 +256,7 @@ void Menu(bool &quit)
     rendertext("BEST SCORE : " +std::to_string(bestScore()) , SCREEN_WIDTH/2 + 275 , SCREEN_HEIGHT/2 -150 );
     rendertext("PLAY" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
     rendertext("QUIT" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
-//    homepage.free() ;
+
     SDL_RenderPresent(gRenderer);
     bool isclick = false ;
 
