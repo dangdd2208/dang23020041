@@ -77,6 +77,13 @@ bool loadMedia()
             success=false;
         }
     }
+    for(int i= sovatcantoida;i < sovatcantoida2;i++)
+    {
+        if(!barrier[i].loadFromFile(gRenderer,"barrier2.png"))
+        {
+           success = false ;
+        }
+    }
 	if( !gFooTexture.loadFromFile(gRenderer, "plane_fly.png" ) )
 	{
 
@@ -87,11 +94,6 @@ bool loadMedia()
     {
         success = false ;
     }
-
-   // if(!homepage.loadFromFile(gRenderer,"25377-7-pause-button-image.png"))
-   // {
-   //     success = false ;
-   // }
     //load music
     sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3" );
     if( sound == NULL )
@@ -105,7 +107,7 @@ bool loadMedia()
 //ham dong
 void close()
 {
-	for(int i=0;i<sovatcantoida;i++)
+	for(int i=0;i<sovatcantoida2;i++)
         barrier[i].free() ;
 	gFooTexture.free();
 	gBackgroundTexture.free();
@@ -132,7 +134,7 @@ void close()
 
 void khoitao()
 {
- for(int i = 0; i < sovatcantoida; i++)
+ for(int i = 0; i < sovatcantoida2; i++)
   {
     barrierPositionsy[i] = 0;
     barrierPositionsx[i] = randomimage(100,1177);
@@ -211,7 +213,7 @@ void rendertext2(const std::string &s ,int x ,int y)
 void resetGame() {
     gFooTexture.free();
     // Xóa các vật thể rơi xuống
-    for(int i = 0; i < sovatcantoida; ++i) {
+    for(int i = 0; i < sovatcantoida2; ++i) {
         barrier[i].free();
     }
 
@@ -246,6 +248,13 @@ void resetGame() {
             {
                 return ;
             }
+    }
+    for(int i = sovatcantoida ; i < sovatcantoida2  ;i++)
+    {
+        if(!barrier[i].loadFromFile(gRenderer,"barrier2.png"))
+        {
+            return ;
+        }
     }
     khoitao();
 }
@@ -493,19 +502,19 @@ int main( int argc, char* args[] )
                 //ham tao do roi cho vat .
 				for(int i=0;i<n;i++)
                 {
-                  barrierPositionsy[i]+=  randomDouble(speed , 1.09*speed);
+                  barrierPositionsy[i]+=  randomDouble(speed , 1.02*speed);
                   if(barrierPositionsy[i]>SCREEN_HEIGHT-chieurongimage)
                   {
                       barrierPositionsy[i] = randomimage(0,75);
                       barrierPositionsx[i] = randomimage(14,SCREEN_WIDTH-chieurongimage);
 
-                      if(n < sovatcantoida)
+                      if(n < sovatcantoida2)
                       {
                           n++ ;
                       }
                       else
                       {
-                          n = sovatcantoida ;
+                          n = sovatcantoida2;
                           speed += 0.0008 ;
                          if(speed > max_speed)
                           {
