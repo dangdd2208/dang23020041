@@ -36,7 +36,7 @@ int barrierPositionsx[25];
 //khoi tao vi tri ban dau cho vat
 void khoitao();
 //toc do ban dau  :
-double speed = 0.05,max_speed = 0.125;
+double speed = 0.05,max_speed = 0.13;
 
 //mang song ban dau
 int YourHeath = 3;

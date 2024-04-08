@@ -63,7 +63,6 @@ void LTexture::free()
 
 void LTexture::render(SDL_Renderer* gRenderer , int x, int y )
 {
-	//Dieu chinh render
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
 	SDL_RenderCopy( gRenderer, mTexture, NULL, &renderQuad );
 }
