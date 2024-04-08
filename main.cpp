@@ -95,7 +95,7 @@ bool loadMedia()
         success = false ;
     }
     //load music
-    sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3" );
+    sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3");
     if( sound == NULL )
 	{
 		success = false;
@@ -137,7 +137,7 @@ void khoitao()
  for(int i = 0; i < sovatcantoida2; i++)
   {
     barrierPositionsy[i] = 0;
-    barrierPositionsx[i] = randomimage(100,1177);
+    barrierPositionsx[i] = randomimage(50,1177);
   }
 }
 int bestScore() {
@@ -165,7 +165,7 @@ void rendertext(const std::string &s ,int x ,int y )
      SDL_Surface* textSurface = TTF_RenderText_Solid(gfont, s.c_str(), textColor);
      if(textSurface == NULL)
      {
-         std :: cout<< "Warming : " <<std::endl;  return;
+         std :: cout<< "Warming: " <<std::endl;  return;
      }
      else
      {
@@ -238,7 +238,7 @@ void resetGame() {
     //tao lai chuong trinh
     YourHeath = Max_heath;
     vatdai = 125;
-    vatrong = 300;
+    vatrong = 400;
     speed = 0.05;
     // Khởi tạo lại số lượng vật thể rơi xuống
     n = Max_heath;
@@ -314,7 +314,6 @@ void Menu(bool &quit)
 
 void hieuungno(bool &quit,double &speed)
 {
-
     rendertext("Score : "+std::to_string((SDL_GetTicks()-dem)/100),SCREEN_WIDTH / 2 - 100,SCREEN_HEIGHT / 2 - 150);
     dem =SDL_GetTicks();
     int tmp = bestScore();
@@ -354,13 +353,12 @@ void hieuungno(bool &quit,double &speed)
                 if( mouseY > SCREEN_HEIGHT / 2 + 50 && mouseY < SCREEN_HEIGHT / 2 + 100)
                 {
                     //doi mau chu
-                    //rendertext2("Quit" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
                     isclick = true;
                     quit = true;
                     // Thoát chương trình
                 }
+            }
         }
-    }
     }
 }
 
@@ -368,14 +366,14 @@ double  randomimage(int a,int b)
 {
     return rand()%(b-imagewith)+a;
 }
-double randomDouble(double min1, double max1) {
+double randomDouble(double min1, double max1){
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(min1, max1);
 
     return dis(gen);
 }
-//ham kiem tra va chm
+//ham kiem tra va cham
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {
     // rect của a
@@ -432,8 +430,7 @@ int main( int argc, char* args[] )
             {
                 barrierPositionsx[i]=randomimage(0,SCREEN_WIDTH);
             }
-
-		   //khoi tao trai tim
+            //khoi tao trai tim
 		    for(int i=0;i<YourHeath;i++)
             {
                 if( !heathy[i].loadFromFile(gRenderer ,"traitim.png"))
@@ -492,7 +489,6 @@ int main( int argc, char* args[] )
 
 				//vi tri cua main:
 				gFooTexture.render(gRenderer, vatdai, vatrong );
-			//	homepage.render(gRenderer,1159,10);
 				//Update :
                 for(int i=0;i  <  YourHeath;  i++ )
                  {

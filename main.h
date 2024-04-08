@@ -12,7 +12,7 @@ const int SCREEN_WIDTH = 1200;
 const  int SCREEN_HEIGHT = 696;
 //vi tri ban dau cua vat
 int vatdai = 125;
-int vatrong = 300;
+int vatrong = 400;
 //chieu dai va rong cua nhan vat
 const int chieudai = 60;
 const int chieurong = 40;
@@ -57,7 +57,6 @@ LTexture barrier[25];
 LTexture heathy[Max_heath];
 //trai tim rong
 LTexture heathy2;
-
 //nhac nen
 Mix_Music* sound = NULL ;
 //ttf
