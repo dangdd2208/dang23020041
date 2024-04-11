@@ -6,14 +6,14 @@
 1710595915 source:d:\dang123\ltexture.cpp
 	"LTexture.h"
 
-1712063309 d:\dang123\ltexture.h
+1712581078 d:\dang123\ltexture.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 	<SDL_ttf.h>
 
-1712566273 d:\dang123\main.h
+1712571047 d:\dang123\main.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>

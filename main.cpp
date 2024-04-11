@@ -8,6 +8,7 @@ bool init()
 	// SDL
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
 	{
+	    std::cout<<"Warming : "<<std::endl;
 		success = false;
 	}
 	else
@@ -22,6 +23,7 @@ bool init()
 		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
+		    std::cout<<"Warming : "<<std::endl;
 			success = false;
 		}
 		else
@@ -30,6 +32,7 @@ bool init()
 			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
 			if( gRenderer == NULL )
 			{
+			    std::cout<<"Warming : "<<std::endl;
 				success = false;
 			}
 			else
@@ -40,13 +43,14 @@ bool init()
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
 				{
-
+				    std::cout<<"Warming : "<<std::endl;
 					success = false;
 				}
 
 				//mixer :
 				if( Mix_OpenAudio( 48000, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
 				{
+				    std::cout<<"Warming : "<<std::endl;
 					success = false;
 				}
 			}
@@ -55,11 +59,13 @@ bool init()
     //TTF
     if(TTF_Init() == -1 )
     {
+        std::cout<<"Warming : "<<std::endl;
         success = false ;
     }
     gfont = TTF_OpenFont("Anta-Regular.ttf",28) ; //duong dan dem file .ttf
     if(gfont == NULL)
     {
+        std::cout<<"Warming : "<<std::endl;
         success = false ;
     }
 	return success;
@@ -74,6 +80,7 @@ bool loadMedia()
     {
         if( !barrier[i].loadFromFile(gRenderer,"barrier.png") )
         {
+            std::cout<<"Warming : "<<std::endl;
             success=false;
         }
     }
@@ -81,23 +88,26 @@ bool loadMedia()
     {
         if(!barrier[i].loadFromFile(gRenderer,"barrier2.png"))
         {
+           std::cout<<"Warming : "<<std::endl;
            success = false ;
         }
     }
 	if( !gFooTexture.loadFromFile(gRenderer, "plane_fly.png" ) )
 	{
-
+        std::cout<<"Warming : "<<std::endl;
 		success = false;
 	}
 
     if(!gBackgroundTexture.loadFromFile(gRenderer,"55033334-forest-game-background-background-2d-game-application-vector-design-tileable-horizontally-size.jpg"))
     {
+        std::cout<<"Warming : "<<std::endl;
         success = false ;
     }
     //load music
     sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3");
     if( sound == NULL )
 	{
+	    std::cout<<"Warming : "<<std::endl;
 		success = false;
 	}
 
@@ -307,8 +317,8 @@ void Menu(bool &quit)
                     // Thoát chương trình
                     quit = false ;
                 }
+            }
         }
-    }
     }
 }
 
@@ -366,6 +376,7 @@ double  randomimage(int a,int b)
 {
     return rand()%(b-imagewith)+a;
 }
+
 double randomDouble(double min1, double max1){
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -373,7 +384,7 @@ double randomDouble(double min1, double max1){
 
     return dis(gen);
 }
-//ham kiem tra va cham
+
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {
     // rect của a
@@ -394,7 +405,6 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
     if (rightA <= leftB) return false;
     if (leftA >= rightB) return false;
 
-    // day la khi khong va cham
     return true;
 }
 
@@ -425,7 +435,7 @@ int main( int argc, char* args[] )
 			SDL_Event e;
 			//nhac
             Mix_PlayMusic(sound,-1);
-            //tao vi tri cho cho vat dau tien .
+            //tao vi tri cho cho vat dau tien.
             for(int i=0;i<n;i++)
             {
                 barrierPositionsx[i]=randomimage(0,SCREEN_WIDTH);
@@ -506,6 +516,7 @@ int main( int argc, char* args[] )
 
                       if(n < sovatcantoida2)
                       {
+                          speed += 0.0000013;
                           n++ ;
                       }
                       else
@@ -521,7 +532,7 @@ int main( int argc, char* args[] )
                   }
                   //tao rect cho vat
                   rect2 = {barrierPositionsx[i],barrierPositionsy[i],imagewith,chieurongimage};
-                  //kiem tra va cham va thoi gian truoc khi va cham tiep theo...
+                  //kiem tra va cham va thoi gian truoc khi va cham tiep theo.
                   if( (SDL_GetTicks() - lastCollisionTime > COOLDOWN_TIME ) && checkCollision(rect1,rect2))
                   {
                     // thay doi thoi gian
@@ -539,7 +550,7 @@ int main( int argc, char* args[] )
                   }
                    else if(lastCollisionTime != 0 &&  SDL_GetTicks()-lastCollisionTime <= COOLDOWN_TIME )
                     {
-                      //thoi gian :
+                      //thoi gian:
                       Uint32 elapsedTime = SDL_GetTicks()-lastCollisionTime ;
                       //giam mau cua vat khi va cham .
                       gFooTexture.giammau((Uint8)((float)elapsedTime/COOLDOWN_TIME*255));
