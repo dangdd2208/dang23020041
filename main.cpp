@@ -1,5 +1,6 @@
 #include "LTexture.h"
 #include "main.h"
+double randomDouble(double min1, double max1);
 bool init()
 {
 	// flag
@@ -148,6 +149,7 @@ void khoitao()
   {
     barrierPositionsy[i] = 0;
     barrierPositionsx[i] = randomimage(50,1177);
+    pace[i] = randomDouble(speed * 0.5 , speed * 1.975);
   }
 }
 int bestScore() {
@@ -249,7 +251,7 @@ void resetGame() {
     YourHeath = Max_heath;
     vatdai = 125;
     vatrong = 400;
-    speed = 0.05;
+    speed = 0.025;
     // Khởi tạo lại số lượng vật thể rơi xuống
     n = Max_heath;
      //Khởi tạo lại vị trí của các vật thể rơi xuống
@@ -508,21 +510,21 @@ int main( int argc, char* args[] )
                 //ham tao do roi cho vat .
 				for(int i=0;i<n;i++)
                 {
-                  barrierPositionsy[i]+=  randomDouble(speed , 1.02*speed);
+                  barrierPositionsy[i]+=  pace[i];
                   if(barrierPositionsy[i]>SCREEN_HEIGHT-chieurongimage)
                   {
                       barrierPositionsy[i] = randomimage(0,75);
                       barrierPositionsx[i] = randomimage(14,SCREEN_WIDTH-chieurongimage);
-
+                      pace[i] = randomDouble(0.3 * speed , 1.5 *speed);
                       if(n < sovatcantoida2)
                       {
-                          speed += 0.0000013;
+                          speed += 0.000013;
                           n++ ;
                       }
                       else
                       {
                           n = sovatcantoida2;
-                          speed += 0.0008 ;
+                          speed += 0.00085 ;
                          if(speed > max_speed)
                           {
                               speed = max_speed ;
