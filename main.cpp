@@ -1,5 +1,14 @@
 #include "LTexture.h"
 #include "main.h"
+
+//random
+std::random_device rd;
+std::mt19937 gen(rd());
+double randomDouble(double min1, double max1, std::mt19937& gen){
+    std::uniform_real_distribution<> dis(min1, max1);
+
+    return dis(gen);
+}
 double randomDouble(double min1, double max1);
 bool init()
 {
@@ -149,7 +158,8 @@ void khoitao()
   {
     barrierPositionsy[i] = 0;
     barrierPositionsx[i] = randomimage(50,1177);
-    pace[i] = randomDouble(speed * 0.5 , speed * 1.975);
+    pace[i] = randomDouble(speed0 / 2 , speed * 1.975,gen);
+    std::cout<<pace[i]<<std::endl;
   }
 }
 int bestScore() {
@@ -251,7 +261,7 @@ void resetGame() {
     YourHeath = Max_heath;
     vatdai = 125;
     vatrong = 400;
-    speed = 0.025;
+    speed = 0.035;
     // Khởi tạo lại số lượng vật thể rơi xuống
     n = Max_heath;
      //Khởi tạo lại vị trí của các vật thể rơi xuống
@@ -377,14 +387,6 @@ void hieuungno(bool &quit,double &speed)
 double  randomimage(int a,int b)
 {
     return rand()%(b-imagewith)+a;
-}
-
-double randomDouble(double min1, double max1){
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(min1, max1);
-
-    return dis(gen);
 }
 
 bool checkCollision(SDL_Rect a, SDL_Rect b)
@@ -515,7 +517,7 @@ int main( int argc, char* args[] )
                   {
                       barrierPositionsy[i] = randomimage(0,75);
                       barrierPositionsx[i] = randomimage(14,SCREEN_WIDTH-chieurongimage);
-                      pace[i] = randomDouble(0.3 * speed , 1.5 *speed);
+                      pace[i] = randomDouble(speed0 , 1.5 *speed,gen);
                       if(n < sovatcantoida2)
                       {
                           speed += 0.000013;
@@ -524,16 +526,23 @@ int main( int argc, char* args[] )
                       else
                       {
                           n = sovatcantoida2;
-                          speed += 0.00085 ;
+                          speed += 0.00085;
                          if(speed > max_speed)
                           {
                               speed = max_speed ;
                           }
                       }
                       SDL_RenderPresent(gRenderer);
+                      std::cout<<pace[i]<<std::endl;
                   }
                   //tao rect cho vat
+                  if(i<20){
                   rect2 = {barrierPositionsx[i],barrierPositionsy[i],imagewith,chieurongimage};
+                  }
+                  else
+                  {
+                      rect2 = {barrierPositionsx[i],barrierPositionsy[i],32,60};
+                  }
                   //kiem tra va cham va thoi gian truoc khi va cham tiep theo.
                   if( (SDL_GetTicks() - lastCollisionTime > COOLDOWN_TIME ) && checkCollision(rect1,rect2))
                   {
