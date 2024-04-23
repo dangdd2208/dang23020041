@@ -79,7 +79,7 @@ Tạo  ra nhiều đối tượng : nhân vật chính, vật thể rơi, menu..
 
 Sử dụng các cách tách file.
 
-Dùng các kiến thức lập trình cơ bản vào logic game để nhân vật chính có thể tránh được các vật thể rơi và  nâng cao số điểm.
+Dùng các kiến thức lập trình cơ bản vào logic game để nhân vật chính có thể tránh được các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và  nâng cao số điểm.
 
 Có thể chơi lại game vì có sử dụng các hàm resetGame.
 
