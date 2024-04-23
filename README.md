@@ -68,6 +68,9 @@ Cách chơi:
   
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
+- ![logo](https://i.imgur.com/6eoYxGD.png)
+- ![logo](https://i.imgur.com/IttGDfd.png)
+- ![logo](https://i.imgur.com/g5NOplS.png)
 ### 3. Các kĩ thuật được sử dụng
 
 Thư viện SDL2(hình ảnh, âm thanh, font chữ).
