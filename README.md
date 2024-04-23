@@ -64,7 +64,7 @@ Cách chơi:
 - Sử dụng phím: A hoặc ← Để di chuyển sang trái.
 - Sử dụng phím: W hoặc ↑ Để di chuyển lên trên.
 - Sử dụng phím: S hoặc ↓ Để di chuyển xuống dưới.
-- Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện.(Game đang chờ bạn)
+- Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện. Và bạn có một số mạng nhất định(3 mạng ![logo](https://i.imgur.com/0rAsPss.png)) khi hết mạng bạn mà chạm vào thiên thạch rơi thì sẽ GAME OVER!!!
   
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
