@@ -59,9 +59,13 @@ Sau đó, bạn có thể bắt đầu trò chơi.
 Mọi khó khăn liên hệ: dinhdang2208@gmail.com.
 
 ### 2. Cách chơi game và preview
-
-Sử dụng các phím: W  hoặc       để tránh vật thể đang rơi từ trên cao xuống và đạt được điểm cao nhất.
-
+Cách chơi:
+- Sử dụng các phím: D  hoặc  →  Để di chuyển sang phải.
+- Sử dụng phím: A hoặc ← Để di chuyển sang trái.
+- Sử dụng phím: W hoặc ↑ Để di chuyển lên trên.
+- Sử dụng phím: S hoặc ↓ Để di chuyển xuống dưới.
+- Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật tránh ra khỏi các vật thể rơi và đạt số điểm cao.Độ kho của game tăng dần theo thời gian.
+Preview:
 ### 3. Các kĩ thuật được sử dụng
 
 Thư viện SDL2(hình ảnh, âm thanh, font chữ).
