@@ -67,7 +67,7 @@ Cách chơi:
 - Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật tránh ra khỏi các vật thể rơi và đạt số điểm cao.Độ kho của game tăng dần theo thời gian.
   
 Preview:
-- ![logo]("C:\Users\LENOVO\OneDrive - vnu.edu.vn\Ảnh\Ảnh chụp màn hình\Screenshot 2024-04-23 233435.png")
+- ![logo](C:\Users\LENOVO\OneDrive - vnu.edu.vn\Ảnh\Ảnh chụp màn hình\Screenshot 2024-04-23 233435.png)
 ### 3. Các kĩ thuật được sử dụng
 
 Thư viện SDL2(hình ảnh, âm thanh, font chữ).
