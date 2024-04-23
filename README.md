@@ -21,6 +21,8 @@ UET - Assignment - Project.
  Đây là trò chơi theo ý tưởng của game của google khi mất mạng.
 
  Đây là phiên bản cho PC.
+ 
+ Code có hơi khó đọc. Mong thầy và mọi người thông cảm ạ.
 
  Có âm thanh khi trải nghiệm.
 
@@ -65,6 +67,7 @@ Cách chơi:
 - Sử dụng phím: W hoặc ↑ Để di chuyển lên trên.
 - Sử dụng phím: S hoặc ↓ Để di chuyển xuống dưới.
 - Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện. Và bạn có một số mạng nhất định(3 mạng ![logo](https://i.imgur.com/0rAsPss.png)) khi hết mạng bạn mà chạm vào thiên thạch rơi thì sẽ GAME OVER!!!
+- Sau khi chết có thể nhấn vào PlayAgain để chơi lại hoặc Quit để thoát.
   
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
@@ -107,10 +110,12 @@ Cảm ơn các thầy đã hỗ trợ em:
 
  Việc hoàn thiện project này giúp em mở mang rất nhiều :
 
- Biết cách dùng github.
+- Biết cách dùng github.
 
- Biết chia nhỏ vấn đề và chia file.
+- Biết chia nhỏ vấn đề và chia file.
 
- Biết cách sử dụng thư viện SDL.
+- Biết cách sử dụng thư viện SDL.
 
-Học thêm được các thuật toán.
+- Học thêm được các thuật toán.
+
+- Biết thêm về lập trình hướng đối tượng và class.
