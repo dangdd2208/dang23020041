@@ -52,7 +52,7 @@ UET - Assignment - Project.
 
 - SDL_ttf: https://github.com/libsdl-org/SDL_ttf/releases
 
-Sau khi tải xong, sử dụng terminal để dowload source code(dùng lệnh git clone):
+Sau khi tải xong, sử dụng terminal để dowload source code(dùng lệnh git clone): https://github.com/dangdd2208/dang23020041.
 
 Sau đó, bạn có thể bắt đầu trò chơi.
 
@@ -64,7 +64,7 @@ Cách chơi:
 - Sử dụng phím: A hoặc ← Để di chuyển sang trái.
 - Sử dụng phím: W hoặc ↑ Để di chuyển lên trên.
 - Sử dụng phím: S hoặc ↓ Để di chuyển xuống dưới.
-- Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian.
+- Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện.(Game đang chờ bạn)
   
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
@@ -89,11 +89,11 @@ Có sử dụng các thuật toán đơn giản.
 
 ### 4. Nguồn tham khảo
 
-Hình ảnh và âm  thanh , phông chữ đều được tìm kiếm trên google.
+- Hình ảnh và âm  thanh , phông chữ bạn đều được tìm kiếm trên google.
 
-Tài liệu hướng dẫn của thư viện SDL2: https://wiki.libsdl.org
+- Tài liệu hướng dẫn của thư viện SDL2: https://wiki.libsdl.org
 
-Lazyfoo: https://lazyfoo.net/tutorials/SDL
+- Lazyfoo: https://lazyfoo.net/tutorials/SDL
 
 ## ĐÓNG GÓP
 
