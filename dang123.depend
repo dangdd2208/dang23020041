@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1713436990 source:d:\dang123\main.cpp
+1713438781 source:d:\dang123\main.cpp
 	"LTexture.h"
 	"main.h"
 
@@ -13,7 +13,7 @@
 	<string>
 	<SDL_ttf.h>
 
-1713436342 d:\dang123\main.h
+1713437215 d:\dang123\main.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>

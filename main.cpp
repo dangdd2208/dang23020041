@@ -323,8 +323,6 @@ void Menu(bool &quit)
                 }
                 if( mouseY > SCREEN_HEIGHT / 2 + 50 && mouseY < SCREEN_HEIGHT / 2 + 100)
                 {
-                    //doi mau chu
-                    //rendertext2("QUIT" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50);
                     isclick = true;
                     // Thoát chương trình
                     quit = false ;
