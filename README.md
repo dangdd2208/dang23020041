@@ -1,19 +1,19 @@
 # PLANE_MÁY BAY TRÁNH VẬT RƠI
-*UET - Assignment - Project*.
+*[UET](https://uet.vnu.edu.vn)- Assignment - Project*.
 
 ## Giới thiệu
 
  Họ và Tên : Đoàn Đình Đăng.
 
- Lớp : K68CC - UET.
+ Lớp : *K68CC - UET*.
 
  Mã SV : 23020041.
 
- Lớp học phần : LTNC_INT 2215_50.
+ Lớp học phần : *LTNC_INT 2215_50*.
 
- Bài Tập lớn : Plane_MÁY BAY TRÁNH VẬT RƠI.
+ Bài Tập lớn : *Plane_MÁY BAY TRÁNH VẬT RƠI*.
 
- Link Bài tập lớn : https://github.com/dangdd2208/dang23020041.
+ Link bài tập lớn : https://github.com/dangdd2208/dang23020041.
 
 
 ## MÔ TẢ
@@ -44,7 +44,7 @@
 
 ### 1. Cách cài đặt game
 
-Đầu tiên, bạn phải cài đặt `CODE::BLOCKS` để chạy C++. Tiếp theo đó là cặt đặt thêm :
+Đầu tiên, bạn phải cài đặt [`CODE::BLOCKS`](https://www.codeblocks.org/downloads/) để chạy [C++](https://vi.wikipedia.org/wiki/C%2B%2B) và dùng cả thư viện [SDL2](https://www.libsdl.org/download-2.0.php). Tiếp theo đó là cặt đặt thêm :
 
 - SDL 2.0: https://www.libsdl.org/download-1.2.php
 
@@ -56,7 +56,7 @@
 
 - Sau đó cài đặt theo hướng dẫn: https://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php
 
-Sau khi tải xong, sử dụng terminal để dowload source code(dùng lệnh git clone): https://github.com/dangdd2208/dang23020041.
+Sau khi tải xong, sử dụng terminal để dowload source code(dùng lệnh `git clone`): https://github.com/dangdd2208/dang23020041.
 
 Sau đó, bạn có thể bắt đầu trò chơi.
 
@@ -71,7 +71,7 @@ Cách chơi:
 - Khi vào game nhấn `Play`.
 - Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện. Và bạn có một số mạng nhất định(3 mạng ![logo](https://i.imgur.com/0rAsPss.png)) khi hết mạng bạn mà chạm vào thiên thạch rơi thì sẽ GAME OVER!!!
 - Khi va chạm  với thiên thạch mọi thứ sẽ chậm lại để bạn tránh đi xa khỏi thiên thạch.
-- Sau khi chết có thể nhấn vào `PlayAgain` để chơi lại hoặc `Quit` để thoát.
+- Sau khi chết có thể nhấn vào `PlayAgain` để chơi lại hoặc `Quit` để thoát. Và ở màn hình khi chết bạn có thể xem `SCORE` Và `HIGH SCORE`.
  
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
@@ -80,9 +80,9 @@ Preview:
 - ![logo](https://i.imgur.com/g5NOplS.png)
 ### 3. Các kĩ thuật được sử dụng
 
-Thư viện SDL2(hình ảnh, âm thanh, font chữ).
+Thư viện SDL2(*hình ảnh, âm thanh, font chữ*).
 
-Tạo  ra nhiều đối tượng : nhân vật chính, vật thể rơi, menu...
+Tạo  ra nhiều đối tượng : *nhân vật chính, vật thể rơi, menu*...
 
 Sử dụng các cách tách file:
  - main.h lưu trữ các biến toàn cục của chương trình.
@@ -93,22 +93,24 @@ Sử dụng các cách tách file:
        - randomDouble : sinh ra các số double ngẫu nhiên (tốc đọ cho thiên thạch )
 
        - Hàm check va chạm (nơi kiểm tra va chạm giữa nhân vật và thiên thạch).
+
+       - .....
     
- - LTexture.h và LTexture.cpp là nơi tạo class và định nghĩa class.
+ - LTexture.h và LTexture.cpp là nơi tạo `class` và định nghĩa `class`.
 
 Dùng các kiến thức lập trình cơ bản vào logic game để nhân vật chính có thể tránh được các vật thể rơi và  nâng cao số điểm.
 
-Có thể chơi lại game vì có sử dụng các hàm resetGame.
+Có thể chơi lại game vì có sử dụng các hàm *resetGame*.
 
-Có hàm xử lí âm thanh, Hình ảnh, Bàn phím,....
+Có hàm xử lí *âm thanh, Hình ảnh, Bàn phím*,....
 
 Có sử dụng các thuật toán đơn giản.
 
 ### 4. Nguồn tham khảo
 
-- Hình ảnh và âm  thanh , phông chữ bạn đều được tìm kiếm trên google.
+- Hình ảnh và âm  thanh , phông chữ bạn đều được tìm kiếm trên `google`.
 
-- Tài liệu hướng dẫn của thư viện SDL2: https://wiki.libsdl.org
+- Tài liệu hướng dẫn của thư viện `SDL2`: https://wiki.libsdl.org
 
 - Lazyfoo: https://lazyfoo.net/tutorials/SDL
 
@@ -126,12 +128,12 @@ Cảm ơn các thầy đã hỗ trợ em:
 
  Việc hoàn thiện project này giúp em mở mang rất nhiều :
 
-- Biết cách dùng github.
+- Biết cách dùng `github`.
 
 - Biết chia nhỏ vấn đề và chia file.
 
-- Biết cách sử dụng thư viện SDL.
+- Biết cách sử dụng thư viện `SDL2`.
 
 - Học thêm được các thuật toán.
 
-- Biết thêm về lập trình hướng đối tượng và class.
+- Biết thêm về lập trình hướng đối tượng `OOP` và `class`.
