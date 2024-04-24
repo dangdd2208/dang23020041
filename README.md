@@ -43,6 +43,11 @@
 ## NỘI DUNG
 
 ### 1. Cách cài đặt game
+- #### 1.1 Cách tải không dùng code
+   - Tải game nén thành file zip : https://github.com/dangdd2208/dang23020041/releases
+   - Tải file `dowload game` để dowload game sau để giải nén tệp tin.
+   - Nhấn vào tệp `Gamedemo.exe` để chơi game.
+- #### 1.2 Cách tải game dùng code và có thể biên dịch  
 
 Đầu tiên, bạn phải cài đặt [`CODE::BLOCKS`](https://www.codeblocks.org/downloads/) để chạy [C++](https://vi.wikipedia.org/wiki/C%2B%2B) và dùng cả thư viện [SDL2](https://www.libsdl.org/download-2.0.php). Tiếp theo đó là cặt đặt thêm :
 
