@@ -33,6 +33,7 @@
 		</Compiler>
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
+		<Unit filename="README.md" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Extensions />

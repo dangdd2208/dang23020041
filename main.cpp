@@ -1,7 +1,7 @@
 #include "LTexture.h"
 #include "main.h"
 
-//random
+//random double
 std::random_device rd;
 std::mt19937 gen(rd());
 double randomDouble(double min1, double max1, std::mt19937& gen){
@@ -9,7 +9,6 @@ double randomDouble(double min1, double max1, std::mt19937& gen){
 
     return dis(gen);
 }
-double randomDouble(double min1, double max1);
 bool init()
 {
 	// flag
@@ -72,7 +71,7 @@ bool init()
         std::cout<<"Warming : "<<std::endl;
         success = false ;
     }
-    gfont = TTF_OpenFont("Anta-Regular.ttf",28) ; //duong dan dem file .ttf
+    gfont = TTF_OpenFont("ttf/Anta-Regular.ttf",28) ; //duong dan dem file .ttf
     if(gfont == NULL)
     {
         std::cout<<"Warming : "<<std::endl;
@@ -88,7 +87,7 @@ bool loadMedia()
 
 	for(int i=0;i < sovatcantoida ; i++)
     {
-        if( !barrier[i].loadFromFile(gRenderer,"barrier.png") )
+        if( !barrier[i].loadFromFile(gRenderer,"ảnh/barrier.png") )
         {
             std::cout<<"Warming : "<<std::endl;
             success=false;
@@ -96,25 +95,25 @@ bool loadMedia()
     }
     for(int i= sovatcantoida;i < sovatcantoida2;i++)
     {
-        if(!barrier[i].loadFromFile(gRenderer,"barrier2.png"))
+        if(!barrier[i].loadFromFile(gRenderer,"ảnh/barrier2.png"))
         {
            std::cout<<"Warming : "<<std::endl;
            success = false ;
         }
     }
-	if( !gFooTexture.loadFromFile(gRenderer, "plane_fly.png" ) )
+	if( !gFooTexture.loadFromFile(gRenderer, "ảnh/plane_fly.png" ) )
 	{
         std::cout<<"Warming : "<<std::endl;
 		success = false;
 	}
 
-    if(!gBackgroundTexture.loadFromFile(gRenderer,"55033334-forest-game-background-background-2d-game-application-vector-design-tileable-horizontally-size.jpg"))
+    if(!gBackgroundTexture.loadFromFile(gRenderer,"ảnh/55033334-forest-game-background-background-2d-game-application-vector-design-tileable-horizontally-size.jpg"))
     {
         std::cout<<"Warming : "<<std::endl;
         success = false ;
     }
     //load music
-    sound = Mix_LoadMUS( "8bit-music-for-game-68698.mp3");
+    sound = Mix_LoadMUS( "âm nhạc/8bit-music-for-game-68698.mp3");
     if( sound == NULL )
 	{
 	    std::cout<<"Warming : "<<std::endl;
@@ -131,7 +130,6 @@ void close()
         barrier[i].free() ;
 	gFooTexture.free();
 	gBackgroundTexture.free();
-	//homepage.free();
     heathy2.free();
 
 	SDL_DestroyRenderer( gRenderer );
@@ -159,7 +157,7 @@ void khoitao()
     barrierPositionsy[i] = 0;
     barrierPositionsx[i] = randomimage(50,1177);
     pace[i] = randomDouble(speed0 / 2 , speed * 1.975,gen);
-    std::cout<<pace[i]<<std::endl;
+    //std::cout<<pace[i]<<std::endl;
   }
 }
 int bestScore() {
@@ -245,16 +243,15 @@ void resetGame() {
     }
 
     heathy2.free();
-    if (!gFooTexture.loadFromFile(gRenderer, "plane_fly.png")) {
+    if (!gFooTexture.loadFromFile(gRenderer, "ảnh/plane_fly.png")) {
 
         return;
     }
     for(int i = 0; i < Max_heath; ++i) {
-        if (!heathy[i].loadFromFile(gRenderer, "traitim.png")) {
+        if (!heathy[i].loadFromFile(gRenderer, "ảnh/traitim.png")) {
 
             return;
         }
-
         heathy[i].render(gRenderer,i * 30, 0);
     }
     //tao lai chuong trinh
@@ -266,14 +263,14 @@ void resetGame() {
     n = Max_heath;
      //Khởi tạo lại vị trí của các vật thể rơi xuống
     for(int i = 0; i <sovatcantoida ; ++i) {
-            if(!barrier[i].loadFromFile(gRenderer,"barrier.png"))
+            if(!barrier[i].loadFromFile(gRenderer,"ảnh/barrier.png"))
             {
                 return ;
             }
     }
     for(int i = sovatcantoida ; i < sovatcantoida2  ;i++)
     {
-        if(!barrier[i].loadFromFile(gRenderer,"barrier2.png"))
+        if(!barrier[i].loadFromFile(gRenderer,"ảnh/barrier2.png"))
         {
             return ;
         }
@@ -311,7 +308,7 @@ void Menu(bool &quit)
                     //doi mau chu
                     rendertext2("PLAY" , SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50);
                     gBackgroundTexture.free();
-                    if(!gBackgroundTexture.loadFromFile(gRenderer,"abcd.jpg"))
+                    if(!gBackgroundTexture.loadFromFile(gRenderer,"ảnh/abcd.jpg"))
                     {
                         return ;
                     }
@@ -334,6 +331,7 @@ void Menu(bool &quit)
 
 void hieuungno(bool &quit,double &speed)
 {
+    //in chu
     rendertext("Score : "+std::to_string((SDL_GetTicks()-dem)/100),SCREEN_WIDTH / 2 - 100,SCREEN_HEIGHT / 2 - 150);
     dem =SDL_GetTicks();
     int tmp = bestScore();
@@ -445,7 +443,7 @@ int main( int argc, char* args[] )
             //khoi tao trai tim
 		    for(int i=0;i<YourHeath;i++)
             {
-                if( !heathy[i].loadFromFile(gRenderer ,"traitim.png"))
+                if( !heathy[i].loadFromFile(gRenderer ,"ảnh/traitim.png"))
                 {
                  quit = true;
                 }
@@ -518,28 +516,28 @@ int main( int argc, char* args[] )
                       pace[i] = randomDouble(speed0 , 1.5 *speed,gen);
                       if(n < sovatcantoida2)
                       {
-                          speed += 0.000013;
+                          speed += 0.00002;
                           n++ ;
                       }
                       else
                       {
                           n = sovatcantoida2;
-                          speed += 0.00085;
+                          speed += 0.0009;
                          if(speed > max_speed)
                           {
                               speed = max_speed ;
                           }
                       }
                       SDL_RenderPresent(gRenderer);
-                      std::cout<<pace[i]<<std::endl;
+                     // std::cout<<pace[i]<<std::endl;
                   }
                   //tao rect cho vat
                   if(i<20){
-                  rect2 = {barrierPositionsx[i],barrierPositionsy[i],imagewith,chieurongimage};
+                  rect2 = {barrierPositionsx[i],static_cast<int>(barrierPositionsy[i]),imagewith,chieurongimage};
                   }
                   else
                   {
-                      rect2 = {barrierPositionsx[i],barrierPositionsy[i],32,60};
+                      rect2 = {barrierPositionsx[i],static_cast<int>(barrierPositionsy[i]),32,60};
                   }
                   //kiem tra va cham va thoi gian truoc khi va cham tiep theo.
                   if( (SDL_GetTicks() - lastCollisionTime > COOLDOWN_TIME ) && checkCollision(rect1,rect2))
@@ -564,7 +562,7 @@ int main( int argc, char* args[] )
                       //giam mau cua vat khi va cham .
                       gFooTexture.giammau((Uint8)((float)elapsedTime/COOLDOWN_TIME*255));
                       //tao hieu ung bien mat trai tim
-                      if(!heathy2.loadFromFile(gRenderer,"traitim2.png"))
+                      if(!heathy2.loadFromFile(gRenderer,"ảnh/traitim2.png"))
                          {
                            return 0;
                          }
