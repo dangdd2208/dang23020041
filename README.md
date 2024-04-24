@@ -44,7 +44,7 @@
 
 ### 1. Cách cài đặt game
 - #### 1.1 Cách tải không dùng code
-   - Tải game nén thành file zip : https://github.com/dangdd2208/dang23020041/releases
+   - Tải game nén thành file zip : https://github.com/dangdd2208/dang23020041/releases/tag/release-1.0
    - Tải file `dowload game` để dowload game sau để giải nén tệp tin.
    - Nhấn vào tệp `Gamedemo.exe` để chơi game.
 - #### 1.2 Cách tải game dùng code và có thể biên dịch  
