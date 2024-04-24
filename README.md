@@ -1,5 +1,5 @@
 # PLANE_MÁY BAY TRÁNH VẬT RƠI
-UET - Assignment - Project.
+*UET - Assignment - Project*.
 
 ## Giới thiệu
 
@@ -44,7 +44,7 @@ UET - Assignment - Project.
 
 ### 1. Cách cài đặt game
 
-Đầu tiên, bạn phải cài đặt CODE::BLOCKS để chạy C++. Tiếp theo đó là cặt đặt thêm :
+Đầu tiên, bạn phải cài đặt `CODE::BLOCKS` để chạy C++. Tiếp theo đó là cặt đặt thêm :
 
 - SDL 2.0: https://www.libsdl.org/download-1.2.php
 
@@ -54,6 +54,8 @@ UET - Assignment - Project.
 
 - SDL_ttf: https://github.com/libsdl-org/SDL_ttf/releases
 
+- Sau đó cài đặt theo hướng dẫn: https://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php
+
 Sau khi tải xong, sử dụng terminal để dowload source code(dùng lệnh git clone): https://github.com/dangdd2208/dang23020041.
 
 Sau đó, bạn có thể bắt đầu trò chơi.
@@ -62,13 +64,15 @@ Mọi khó khăn liên hệ: dinhdang2208@gmail.com.
 
 ### 2. Cách chơi game và preview
 Cách chơi:
-- Sử dụng các phím: D  hoặc  →  Để di chuyển sang phải.
-- Sử dụng phím: A hoặc ← Để di chuyển sang trái.
-- Sử dụng phím: W hoặc ↑ Để di chuyển lên trên.
-- Sử dụng phím: S hoặc ↓ Để di chuyển xuống dưới.
+- Sử dụng phím: `D` hoặc  `→`  Để di chuyển sang phải.
+- Sử dụng phím: `A` hoặc `←` Để di chuyển sang trái.
+- Sử dụng phím: `W` hoặc `↑` Để di chuyển lên trên.
+- Sử dụng phím: `S` hoặc `↓` Để di chuyển xuống dưới.
+- Khi vào game nhấn `Play`.
 - Việc của người chơi là sử dụng linh hoạt các phím đúng với chức năng bên trên để điều khiển nhân vật ![logo](https://i.imgur.com/HEGmMHL.png) tránh ra khỏi các vật thể rơi ![logo](https://i.imgur.com/LeDdgGh.png) và đạt số điểm cao.Độ kho của game tăng dần theo thời gian và có cả các vật thể to hơn xuất hiện. Và bạn có một số mạng nhất định(3 mạng ![logo](https://i.imgur.com/0rAsPss.png)) khi hết mạng bạn mà chạm vào thiên thạch rơi thì sẽ GAME OVER!!!
-- Sau khi chết có thể nhấn vào PlayAgain để chơi lại hoặc Quit để thoát.
-  
+- Khi va chạm  với thiên thạch mọi thứ sẽ chậm lại để bạn tránh đi xa khỏi thiên thạch.
+- Sau khi chết có thể nhấn vào `PlayAgain` để chơi lại hoặc `Quit` để thoát.
+ 
 Preview:
 - ![logo](https://i.imgur.com/AhbAStB.png)
 - ![logo](https://i.imgur.com/6eoYxGD.png)
@@ -80,7 +84,17 @@ Thư viện SDL2(hình ảnh, âm thanh, font chữ).
 
 Tạo  ra nhiều đối tượng : nhân vật chính, vật thể rơi, menu...
 
-Sử dụng các cách tách file.
+Sử dụng các cách tách file:
+ - main.h lưu trữ các biến toàn cục của chương trình.
+ - main.cpp nơi viết logic game và các hàm quan trong:
+   
+       - resetGame
+   
+       - randomDouble : sinh ra các số double ngẫu nhiên (tốc đọ cho thiên thạch )
+
+       - Hàm check va chạm (nơi kiểm tra va chạm giữa nhân vật và thiên thạch).
+    
+ - LTexture.h và LTexture.cpp là nơi tạo class và định nghĩa class.
 
 Dùng các kiến thức lập trình cơ bản vào logic game để nhân vật chính có thể tránh được các vật thể rơi và  nâng cao số điểm.
 
@@ -105,6 +119,8 @@ Cảm ơn các thầy đã hỗ trợ em:
 - Thầy Lê Đức Trọng.
 
 - Thầy Trần Trường Thủy.
+
+- Anh Mentor:Nguyễn Bá Thanh Tùng.
 
 ## KẾT LUẬN
 
