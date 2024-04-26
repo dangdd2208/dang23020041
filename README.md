@@ -29,7 +29,7 @@
  Game có các chức năng như : menu , chơi lại , mạng chơi , lưu điểm cao nhất.
 
 ## Video Demo
-(Đặt liên kết video demo ở đây)
+https://youtu.be/R4mnCmml09s
 
 ## MỤC LỤC
  1. [ Cách cài đặt game](#1-cách-cài-đặt-game)
